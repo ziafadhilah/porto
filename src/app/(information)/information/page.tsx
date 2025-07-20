@@ -3,21 +3,64 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 
-export default function HomePage() {
-  const [displayText, setDisplayText] = useState("> Booting system");
-  const [showIntro, setShowIntro] = useState(false);
+export default function InformationPage() {
+  const [displayText, setDisplayText] = useState(
+    "> Establishing secure channel"
+  );
+
+  const WhatsAppIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor">
+      <path d="M16 .396C7.176.396.002 7.57.002 16.385c0 2.891.755 5.594 2.074 7.951L.34 32l7.836-2.055a15.9 15.9 0 0 0 7.824 2.019h.001c8.82 0 15.995-7.174 15.995-15.99C31.996 7.57 24.82.396 16 .396zm0 29.27c-2.607 0-5.13-.677-7.334-1.961l-.525-.312-4.653 1.223 1.24-4.533-.342-.588A13.96 13.96 0 0 1 2.04 16.385c0-7.732 6.28-14.012 13.96-14.012 7.68 0 13.96 6.28 13.96 14.012 0 7.73-6.28 14.011-13.96 14.011zm7.688-10.46c-.42-.21-2.48-1.225-2.865-1.363-.385-.14-.666-.21-.946.21-.28.42-1.085 1.362-1.33 1.642-.245.28-.49.315-.91.105-.42-.21-1.772-.653-3.373-2.08-1.246-1.112-2.087-2.482-2.332-2.903-.245-.42-.026-.647.184-.857.19-.19.42-.49.63-.735.21-.245.28-.42.42-.7.14-.28.07-.525-.035-.735-.105-.21-.946-2.28-1.296-3.13-.34-.82-.68-.71-.946-.72-.245-.01-.525-.012-.805-.012-.28 0-.735.105-1.12.525-.385.42-1.47 1.44-1.47 3.512 0 2.072 1.505 4.077 1.715 4.362.21.28 2.964 4.52 7.185 6.334 1.005.43 1.79.687 2.4.88 1.01.32 1.93.275 2.66.167.81-.12 2.48-1.01 2.835-1.982.35-.972.35-1.805.245-1.982-.105-.175-.385-.28-.805-.49z" />
+    </svg>
+  );
+
+  const contacts = [
+    {
+      label: "Whatsapp",
+      value: "(+62) 81212151324",
+      icon: <WhatsAppIcon />,
+      link: "tel:+6281212151324",
+    },
+    {
+      label: "GitHub",
+      value: "github.com/ziafadhilah",
+      icon: <Github size={16} />,
+      link: "https://github.com/ziafadhilah",
+    },
+    {
+      label: "LinkedIn",
+      value: "linkedin.com/in/ziafadhilah",
+      icon: <Linkedin size={16} />,
+      link: "https://linkedin.com/in/ziafadhilah",
+    },
+    {
+      label: "Instagram",
+      value: "@ziafadhilah.dev",
+      icon: <Instagram size={16} />,
+      link: "https://instagram.com/ziafadhilah.dev",
+    },
+    {
+      label: "Email",
+      value: "ziafadhilah@example.com",
+      icon: <Mail size={16} />,
+      link: "mailto:ziafadhilah@example.com",
+    },
+  ];
+
+  const [showContacts, setShowContacts] = useState(false);
 
   useEffect(() => {
     const dotInterval = setInterval(() => {
       setDisplayText((prev) =>
-        prev.endsWith("...") ? "> Booting system" : prev + "."
+        prev.endsWith("...") ? "> Establishing secure channel" : prev + "."
       );
     }, 500);
 
     const typingTimeout = setTimeout(() => {
       clearInterval(dotInterval);
-      setShowIntro(true);
+      setShowContacts(true);
     }, 3000);
 
     return () => {
@@ -28,7 +71,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center text-gray-300 relative overflow-hidden font-mono">
-      {/* Background Layer */}
+      {/* Background */}
       <motion.div
         className="absolute inset-0 -z-10"
         initial={{ backgroundPosition: "0% 0%" }}
@@ -45,23 +88,9 @@ export default function HomePage() {
           backgroundPosition: "center",
         }}
       />
-
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/50 -z-10"></div>
 
-      <motion.div
-        className="absolute w-[500px] h-[500px] bg-blue-200 opacity-20 blur-3xl rounded-full -z-10 top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
+      {/* Orbiting Glow */}
       <motion.div
         className="absolute w-[500px] h-[500px] bg-blue-200 opacity-20 blur-3xl rounded-full -z-10 top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         animate={{
@@ -106,19 +135,6 @@ export default function HomePage() {
         style={{ top: "10%", left: "50%" }}
       />
 
-      {/* Scan Line */}
-      <motion.div
-        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400/10 via-green-500/30 to-green-400/10 opacity-30 blur-md"
-        animate={{
-          y: ["0%", "100%"],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-
       {/* Title */}
       <motion.h1
         className="text-4xl md:text-6xl font-extrabold italic mb-6 text-white tracking-widest glitch"
@@ -126,7 +142,7 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        HOME
+        INFORMATION
       </motion.h1>
 
       {/* Terminal Box */}
@@ -141,51 +157,38 @@ export default function HomePage() {
           <span className="blinking-cursor">|</span>
         </pre>
 
-        {showIntro && (
+        {showContacts && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="space-y-3 text-green-300"
+            className="space-y-3"
           >
-            <p>
-              Hello, I&apos;m <span className="text-white">Zia Fadhilah</span>.
-            </p>
-            <p>Web & Mobile Developer, focused on UI/UX & API Development.</p>
-            <p>Welcome to my digital space! 🚀</p>
+            {contacts.map((c) => (
+              <motion.a
+                key={c.label}
+                href={c.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-green-300 hover:text-white transition glow-hover"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <span className="text-green-400">{c.icon}</span>
+                <span className="text-sm md:text-base">{c.value}</span>
+              </motion.a>
+            ))}
           </motion.div>
         )}
-
-        {/* Animated Scan Overlay */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/5 to-transparent pointer-events-none"
-          animate={{ y: ["-100%", "100%"] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-        />
       </motion.div>
 
-      {/* Navigation Buttons */}
-      <motion.div
-        className="flex gap-4"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 3, duration: 0.5 }}
+      <Link
+        href="/"
+        className="px-6 py-3 border border-green-400 rounded-2xl text-white hover:bg-green-700 hover:text-white transition"
       >
-        <Link
-          href="/about"
-          className="px-6 py-3 border border-green-400 rounded-2xl text-white hover:bg-green-700 hover:text-white transition"
-        >
-          About Me
-        </Link>
-        <Link
-          href="/info"
-          className="px-6 py-3 border border-green-400 rounded-2xl text-white hover:bg-green-700 hover:text-white transition"
-        >
-          Contact Info
-        </Link>
-      </motion.div>
+        Back to Home
+      </Link>
 
-      {/* Glitch Effect & Custom Animations */}
       <style jsx>{`
         .glitch {
           position: relative;
@@ -207,7 +210,6 @@ export default function HomePage() {
           animation: glitchBottom 3s infinite linear alternate-reverse;
           color: #00ffff;
         }
-
         @keyframes glitchTop {
           0% {
             clip: rect(0, 9999px, 0, 0);
@@ -219,7 +221,6 @@ export default function HomePage() {
             clip: rect(0, 9999px, 0, 0);
           }
         }
-
         @keyframes glitchBottom {
           0% {
             clip: rect(0, 9999px, 0, 0);
@@ -231,12 +232,10 @@ export default function HomePage() {
             clip: rect(0, 9999px, 0, 0);
           }
         }
-
         .blinking-cursor {
           animation: blink 1s step-end infinite;
           color: #00ff99;
         }
-
         @keyframes blink {
           from,
           to {
@@ -246,11 +245,9 @@ export default function HomePage() {
             opacity: 1;
           }
         }
-
         .animate-pulse-slow {
           animation: pulse-slow 3s ease-in-out infinite;
         }
-
         @keyframes pulse-slow {
           0% {
             opacity: 1;
@@ -261,6 +258,9 @@ export default function HomePage() {
           100% {
             opacity: 1;
           }
+        }
+        .glow-hover:hover {
+          text-shadow: 0 0 8px #00ff99, 0 0 12px #00ff99;
         }
       `}</style>
     </div>

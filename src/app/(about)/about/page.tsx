@@ -4,20 +4,43 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function HomePage() {
-  const [displayText, setDisplayText] = useState("> Booting system");
-  const [showIntro, setShowIntro] = useState(false);
+export default function AboutPage() {
+  const [displayText, setDisplayText] = useState("> Initiating transmission");
+  const [showDots, setShowDots] = useState(true);
+  const [typedText, setTypedText] = useState("");
+
+  const details = `
+Nama   : Zia Fadhilah
+Role   : Web & Mobile Developer
+Focus  : Frontend UI/UX, Backend API, Flutter & React Native
+
+Misi saya adalah membuat antarmuka yang menarik dan mudah digunakan, 
+membangun ekosistem teknologi dengan nuansa visual yang elegan.
+
+Jika kamu membaca pesan ini, berarti kita sama-sama sedang 
+berjelajah di ruang ide tak berujung. 🚀
+`;
 
   useEffect(() => {
-    const dotInterval = setInterval(() => {
+    let dotInterval;
+    let typingTimeout;
+
+    dotInterval = setInterval(() => {
       setDisplayText((prev) =>
-        prev.endsWith("...") ? "> Booting system" : prev + "."
+        prev.endsWith("...") ? "> Initiating transmission" : prev + "."
       );
     }, 500);
 
-    const typingTimeout = setTimeout(() => {
+    typingTimeout = setTimeout(() => {
       clearInterval(dotInterval);
-      setShowIntro(true);
+      setShowDots(false);
+
+      let index = 0;
+      const typingInterval = setInterval(() => {
+        setTypedText(details.slice(0, index));
+        index++;
+        if (index > details.length) clearInterval(typingInterval);
+      }, 20);
     }, 3000);
 
     return () => {
@@ -28,7 +51,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center text-gray-300 relative overflow-hidden font-mono">
-      {/* Background Layer */}
+      {/* Background Animation */}
       <motion.div
         className="absolute inset-0 -z-10"
         initial={{ backgroundPosition: "0% 0%" }}
@@ -45,23 +68,9 @@ export default function HomePage() {
           backgroundPosition: "center",
         }}
       />
-
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/50 -z-10"></div>
 
-      <motion.div
-        className="absolute w-[500px] h-[500px] bg-blue-200 opacity-20 blur-3xl rounded-full -z-10 top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
+      {/* Nebula Glow */}
       <motion.div
         className="absolute w-[500px] h-[500px] bg-blue-200 opacity-20 blur-3xl rounded-full -z-10 top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         animate={{
@@ -106,86 +115,42 @@ export default function HomePage() {
         style={{ top: "10%", left: "50%" }}
       />
 
-      {/* Scan Line */}
-      <motion.div
-        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400/10 via-green-500/30 to-green-400/10 opacity-30 blur-md"
-        animate={{
-          y: ["0%", "100%"],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-
       {/* Title */}
       <motion.h1
-        className="text-4xl md:text-6xl font-extrabold italic mb-6 text-white tracking-widest glitch"
+        className="text-4xl md:text-6xl font-extrabold italic mb-6 text-green-400 tracking-widest glitch"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        HOME
+        ABOUT ME
       </motion.h1>
 
-      {/* Terminal Box */}
-      <motion.div
-        className="text-left text-sm md:text-lg text-green-400 bg-black/30 p-6 rounded-2xl backdrop-blur-md shadow-lg max-w-xl w-full mb-10 border border-green-500/30 space-y-4 relative overflow-hidden"
+      {/* Terminal Text */}
+      <motion.pre
+        className="text-left text-sm md:text-lg text-green-400 bg-black/30 p-6 rounded-2xl backdrop-blur-md shadow-lg max-w-xl w-full border border-green-500/30 whitespace-pre-wrap leading-relaxed mb-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 1 }}
       >
-        <pre className="whitespace-pre-wrap leading-relaxed mb-4 animate-pulse-slow">
-          {displayText}
-          <span className="blinking-cursor">|</span>
-        </pre>
+        {displayText}
+        {showDots ? "" : typedText}
+      </motion.pre>
 
-        {showIntro && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="space-y-3 text-green-300"
-          >
-            <p>
-              Hello, I&apos;m <span className="text-white">Zia Fadhilah</span>.
-            </p>
-            <p>Web & Mobile Developer, focused on UI/UX & API Development.</p>
-            <p>Welcome to my digital space! 🚀</p>
-          </motion.div>
-        )}
-
-        {/* Animated Scan Overlay */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/5 to-transparent pointer-events-none"
-          animate={{ y: ["-100%", "100%"] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-        />
-      </motion.div>
-
-      {/* Navigation Buttons */}
+      {/* Back Button */}
       <motion.div
-        className="flex gap-4"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 3, duration: 0.5 }}
+        transition={{ delay: 1, duration: 0.5 }}
       >
         <Link
-          href="/about"
-          className="px-6 py-3 border border-green-400 rounded-2xl text-white hover:bg-green-700 hover:text-white transition"
+          href="/"
+          className="px-6 py-3 border border-green-400 rounded-2xl text-green-400 hover:bg-green-700 hover:text-white transition"
         >
-          About Me
-        </Link>
-        <Link
-          href="/info"
-          className="px-6 py-3 border border-green-400 rounded-2xl text-white hover:bg-green-700 hover:text-white transition"
-        >
-          Contact Info
+          Kembali ke Beranda
         </Link>
       </motion.div>
 
-      {/* Glitch Effect & Custom Animations */}
+      {/* Glitch Effect */}
       <style jsx>{`
         .glitch {
           position: relative;
@@ -197,7 +162,7 @@ export default function HomePage() {
           left: 0;
           width: 100%;
           overflow: hidden;
-          color: #00ff99;
+          color: #ff00ff;
           clip: rect(0, 900px, 0, 0);
         }
         .glitch::before {
@@ -207,7 +172,6 @@ export default function HomePage() {
           animation: glitchBottom 3s infinite linear alternate-reverse;
           color: #00ffff;
         }
-
         @keyframes glitchTop {
           0% {
             clip: rect(0, 9999px, 0, 0);
@@ -219,7 +183,6 @@ export default function HomePage() {
             clip: rect(0, 9999px, 0, 0);
           }
         }
-
         @keyframes glitchBottom {
           0% {
             clip: rect(0, 9999px, 0, 0);
@@ -229,37 +192,6 @@ export default function HomePage() {
           }
           60% {
             clip: rect(0, 9999px, 0, 0);
-          }
-        }
-
-        .blinking-cursor {
-          animation: blink 1s step-end infinite;
-          color: #00ff99;
-        }
-
-        @keyframes blink {
-          from,
-          to {
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse-slow {
-          0% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.7;
-          }
-          100% {
-            opacity: 1;
           }
         }
       `}</style>
