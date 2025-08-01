@@ -21,7 +21,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-black text-white font-mono overflow-hidden">
+      <body className="bg-black text-white font-mono">
         <AnimatePresence mode="wait">
           {showSplash ? (
             <motion.div

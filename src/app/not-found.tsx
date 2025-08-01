@@ -7,8 +7,7 @@ import { useEffect, useState } from "react";
 export default function NotFound() {
   const controls = useAnimation();
   const [typedText, setTypedText] = useState("");
-  const fullText =
-    "Sepertinya kamu tersesat di ruang hampa tak berujung...\nKembali ke beranda sebelum terlambat.";
+  const fullText = "You need to go back.";
 
   useEffect(() => {
     controls.start({
