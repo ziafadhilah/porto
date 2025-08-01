@@ -18,7 +18,7 @@ export default function SplashScreen() {
   const [particles, setParticles] = useState<Particle[]>([]);
   const fullText = "> Initializing hyperspace sequence...";
 
-  // Animasi astronaut
+  // Astronout animation
   useEffect(() => {
     controls.start({
       y: [0, -12, 0],
@@ -30,7 +30,7 @@ export default function SplashScreen() {
     });
   }, [controls]);
 
-  // Efek typing
+  // Typing effect
   useEffect(() => {
     let index = 0;
     const typing = setInterval(() => {
@@ -49,7 +49,7 @@ export default function SplashScreen() {
     return () => clearInterval(interval);
   }, []);
 
-  // Buat partikel hanya di client
+  // Particle client
   useEffect(() => {
     const newParticles: Particle[] = Array.from({ length: 10 }, () => ({
       top: Math.random() * 100,
