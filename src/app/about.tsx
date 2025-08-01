@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function AboutPage() {
   const [showPreview, setShowPreview] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
     show: {
@@ -52,24 +53,52 @@ export default function AboutPage() {
   ];
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-white overflow-hidden font-mono py-28">
+    <section className="relative min-h-screen flex flex-col items-center justify-center text-[#cfeeff] overflow-hidden font-mono py-28">
       {/* Background Glow */}
       <motion.div
-        className="absolute inset-0 -z-10"
-        animate={{ backgroundPosition: ["0% 0%", "20% 20%", "0% 0%"] }}
+        className="absolute inset-0 -z-20"
+        animate={{ backgroundPosition: ["0% 0%", "10% 10%", "0% 0%"] }}
         transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          backgroundImage: "url('/images/bg.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
       />
-      <div className="absolute inset-0 bg-black/70 -z-10" />
+      <div className="absolute inset-0 bg-black/50 -z-20" />
+
+      {/* Efek Glow */}
       <motion.div
-        className="absolute w-[700px] h-[700px] bg-green-400/20 blur-3xl rounded-full -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.25, 0.4, 0.25] }}
+        className="absolute w-[600px] h-[600px] bg-sky-400/20 blur-3xl rounded-full -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
+
+      {/* 🌌 Efek Galaksi */}
+      <div className="absolute inset-0 -z-10">
+        {/* Bintang */}
+        {Array.from({ length: 50 }).map((_, i) => (
+          <motion.span
+            key={i}
+            className="absolute rounded-full bg-white/80"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 2 + 1}px`,
+              height: `${Math.random() * 2 + 1}px`,
+            }}
+            animate={{ opacity: [0, 1, 0], scale: [1, 1.3, 1] }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+            }}
+          />
+        ))}
+
+        {/* Shooting Star */}
+        <motion.div
+          className="absolute w-32 h-[2px] bg-gradient-to-r from-white to-transparent rounded-full"
+          initial={{ x: "-10%", y: "20%", opacity: 0 }}
+          animate={{ x: "110%", opacity: [0, 1, 0] }}
+          transition={{ duration: 3, repeat: Infinity, delay: 2 }}
+        />
+      </div>
 
       <motion.div
         variants={containerVariants}
@@ -85,10 +114,10 @@ export default function AboutPage() {
             alt="Zia Fadhilah"
             width={120}
             height={120}
-            className="rounded-full border-4 border-green-400 shadow-lg mx-auto cursor-pointer"
+            className="rounded-full border-4 border-sky-400 shadow-lg mx-auto cursor-pointer hover:scale-105 transition-transform"
             onClick={() => setShowPreview(true)}
           />
-          <h1 className="text-4xl md:text-6xl font-extrabold text-green-400">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-sky-400">
             About <span className="text-white">Me</span>
           </h1>
         </motion.div>
@@ -96,10 +125,10 @@ export default function AboutPage() {
         {/* Intro */}
         <motion.p
           variants={itemVariants}
-          className="text-lg md:text-xl text-green-200 max-w-3xl mx-auto"
+          className="text-lg md:text-xl text-sky-200 max-w-3xl mx-auto"
         >
           Hi! I'm{" "}
-          <span className="text-green-400 font-semibold">Zia Fadhilah</span>, a
+          <span className="text-sky-400 font-semibold">Zia Fadhilah</span>, a
           passionate Web & Mobile Developer who loves{" "}
           <span className="text-white">crafting UI/UX</span> with smooth user
           experiences and{" "}
@@ -108,15 +137,13 @@ export default function AboutPage() {
 
         {/* Skills */}
         <motion.div variants={itemVariants}>
-          <h2 className="text-2xl font-bold text-green-400 mb-6">
-            🚀 My Skills
-          </h2>
+          <h2 className="text-2xl font-bold text-sky-400 mb-6">🚀 My Skills</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5 max-w-2xl mx-auto">
             {skills.map((skill, i) => (
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.08, rotate: 1 }}
-                className="flex items-center gap-3 p-4 bg-black/40 border border-green-400/30 rounded-lg text-green-200 hover:border-green-400 hover:shadow-[0_0_15px_rgba(34,197,94,0.5)] transition-all"
+                className="flex items-center gap-3 p-4 bg-black/40 border border-sky-400/30 rounded-lg text-sky-200 hover:border-sky-400 hover:shadow-[0_0_15px_rgba(56,189,248,0.5)] transition-all"
               >
                 {skill.icon}
                 <span>{skill.name}</span>
@@ -127,11 +154,11 @@ export default function AboutPage() {
 
         {/* Experience Timeline */}
         <motion.div variants={itemVariants} className="mt-12">
-          <h2 className="text-2xl font-bold text-green-400 mb-6">
+          <h2 className="text-2xl font-bold text-sky-400 mb-6">
             📜 Experience
           </h2>
           <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-green-400/30 -translate-x-1/2" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-sky-400/30 -translate-x-1/2" />
             <div className="space-y-10">
               {experiences.map((exp, i) => (
                 <motion.div
@@ -141,19 +168,21 @@ export default function AboutPage() {
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6, delay: i * 0.2 }}
                   whileHover={{ scale: 1.05 }}
-                  className={`relative w-full md:w-[48%] p-5 bg-black/40 border border-green-400/30 rounded-xl hover:border-green-400 hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] transition-all ${
+                  className={`relative w-full md:w-[48%] p-5 bg-black/40 border border-sky-400/30 rounded-xl hover:border-sky-400 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all ${
                     i % 2 === 0 ? "md:ml-auto" : "md:mr-auto"
                   }`}
                 >
-                  <p className="text-sm text-green-300">{exp.year}</p>
+                  <p className="text-sm text-sky-300">{exp.year}</p>
                   <h3 className="text-lg font-semibold">{exp.title}</h3>
-                  <p className="text-green-400 text-sm">{exp.company}</p>
-                  <p className="text-green-200 text-sm mt-2">{exp.desc}</p>
+                  <p className="text-sky-400 text-sm">{exp.company}</p>
+                  <p className="text-sky-200 text-sm mt-2">{exp.desc}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </motion.div>
+
+        {/* Avatar Preview Modal */}
         <AnimatePresence>
           {showPreview && (
             <motion.div
@@ -176,11 +205,11 @@ export default function AboutPage() {
                   alt="Preview Avatar"
                   width={400}
                   height={400}
-                  className="rounded-xl border-4 border-green-400 shadow-2xl"
+                  className="rounded-xl border-4 border-sky-400 shadow-2xl"
                 />
                 <button
                   onClick={() => setShowPreview(false)}
-                  className="absolute top-2 right-2 bg-black/50 px-3 py-1 rounded-lg text-green-400 hover:bg-black/70"
+                  className="absolute top-2 right-2 bg-black/50 px-3 py-1 rounded-lg text-sky-400 hover:bg-black/70"
                 >
                   ✕
                 </button>

@@ -47,18 +47,18 @@ export default function Header() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/80 backdrop-blur-md shadow-lg border-b border-green-500/30"
-          : "bg-black/40 backdrop-blur-sm border-b border-green-500/10"
+          ? "bg-black/80 backdrop-blur-md shadow-lg border-b border-sky-400/30"
+          : "bg-black/40 backdrop-blur-sm border-b border-sky-400/10"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link
           href="/"
-          className="relative text-2xl font-extrabold text-green-400 transition-all duration-300 hover:scale-110 hover:text-green-300 group"
+          className="relative text-2xl font-extrabold text-sky-400 transition-all duration-300 hover:scale-110 hover:text-sky-300 group"
         >
           ZIA<span className="text-white">SPACE</span>
-          <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+          <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-sky-400 transition-all duration-300 group-hover:w-full"></span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -67,10 +67,10 @@ export default function Header() {
             <a
               key={item.name}
               href={item.href}
-              className="relative pb-1 text-green-300 hover:text-white transition-all duration-300"
+              className="relative pb-1 text-sky-300 hover:text-white transition-all duration-300"
             >
               <span
-                className={`after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-green-400 after:transition-all after:duration-300
+                className={`after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-sky-400 after:transition-all after:duration-300
                 ${
                   activeSection === item.href.replace("#", "")
                     ? "after:w-full text-white"
@@ -85,7 +85,7 @@ export default function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-green-400 hover:scale-110 transition-transform duration-300"
+          className="md:hidden text-sky-400 hover:scale-110 transition-transform duration-300"
           onClick={() => setMenuOpen((prev) => !prev)}
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -100,7 +100,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-black/95 border-t border-green-500/20"
+            className="md:hidden bg-black/95 border-t border-sky-400/20"
           >
             <div className="flex flex-col p-4 space-y-4">
               {navItems.map((item) => (
@@ -111,8 +111,8 @@ export default function Header() {
                   className={`relative pb-1 transition-all duration-300 ${
                     activeSection === item.href.replace("#", "")
                       ? "text-white after:w-full"
-                      : "text-green-300 hover:text-white after:w-0 hover:after:w-full"
-                  } after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-green-400 after:transition-all after:duration-300`}
+                      : "text-sky-300 hover:text-white after:w-0 hover:after:w-full"
+                  } after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-sky-400 after:transition-all after:duration-300`}
                 >
                   {item.name}
                 </a>
